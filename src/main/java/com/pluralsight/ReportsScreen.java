@@ -6,10 +6,15 @@ import java.util.Scanner;
 public class ReportsScreen {
     static void reportsMenu(Scanner scanner) {
         boolean running = true;
-        while (running) {
 
+        System.out.println("""
+                ┌───────────────────────────────────────────┐
+                │        Welcome to the Reports Menu!       │
+                └───────────────────────────────────────────┘
+                """);
+
+        while (running) {
             System.out.println("""
-                    Reports
                     Please select an option:
                     1) Month To Date
                     2) Previous Month
@@ -27,6 +32,7 @@ public class ReportsScreen {
                 case "2":
 
                 case "3":
+
 
                 case "4":
 
