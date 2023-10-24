@@ -8,9 +8,10 @@ public class ReportsScreen {
         boolean running = true;
 
         System.out.println("""
+                \033[1m
                 ┌───────────────────────────────────────────┐
                 │        Welcome to the Reports Menu!       │
-                └───────────────────────────────────────────┘
+                └───────────────────────────────────────────┘\033[0m
                 """);
 
         while (running) {
