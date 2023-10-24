@@ -41,7 +41,7 @@ public class LedgerScreen {
             }
         }
     }
-    // Displaying Ledger
+    // Display Ledger
     private static void displayLedger() {
 
         System.out.println(bold + """

@@ -1,9 +1,11 @@
 package com.pluralsight;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
 
+import static com.pluralsight.LedgerAppRun.readTransactions;
 import static com.pluralsight.LedgerScreen.*;
 import static com.pluralsight.ANSIColors.*;
 
@@ -25,7 +27,7 @@ public class HomeScreen {
                     L) Ledger
                     X) Exit""");
 
-            String input = scanner.nextLine().trim();
+            String input = userInputs(scanner);
 
             switch (input.toUpperCase()) {
                 case "D" -> addDeposit(scanner);
@@ -53,61 +55,79 @@ public class HomeScreen {
                 └──────────────────────────────────────────┘
                 """ + resetBold);
 
-        LocalDate dateInput;
-        LocalTime timeInput;
-
         // Date Input
+        System.out.println("Please enter the date of your payment as -> yyyy-MM-dd:");
+        LocalDate dateInput = userDateInput(scanner);
+
+        System.out.println("(HH:mm) Now enter the time:");
+        LocalTime timeInput = userTimeInput(scanner);
+
+        System.out.println("Now enter the description of your payment:");
+        String description = userInputs(scanner);
+
+        System.out.println("Enter the vendor name:");
+        String vendor = userInputs(scanner);
+
+        System.out.println("Now enter your payment amount:");
+        double amount = userDoubleInputs(scanner);
+
+        if (amount < 0) amount *= -1;
+
+        System.out.println("Thank you! Returning you to previous menu...");
+        System.out.println(bold + """
+                ▒▒▒▒▒▒▒▒▒▒ 0% ██▒▒▒▒▒▒▒▒ 20% ████▒▒▒▒▒▒ 40% ██████▒▒▒▒ 60% ████████▒▒ 80% ██████████ 100%
+                """ + resetBold);
+    }
+
+    public static String userInputs(Scanner scanner) {
+        String input1 = scanner.nextLine().trim();
+        return input1;
+    }
+
+    public static double userDoubleInputs(Scanner scanner) {
         while (true) {
             try {
-                System.out.println("Please enter the date of your payment as -> yyyy-MM-dd:");
+                double doubleInput = scanner.nextDouble();
+                scanner.nextLine();
+                return doubleInput;
+            } catch (Exception e) {
+                System.out.println("Invalid format.");
+            }
+        }
+    }
 
-                String dateInput1 = scanner.nextLine().trim();
+    public static LocalDate userDateInput(Scanner scanner) {
+        while (true) {
+            try {
+                LocalDate dateInput;
+
+                String dateInput1 = userInputs(scanner);
                 dateInput = LocalDate.parse(dateInput1);
 
                 System.out.println("You have entered: " + dateInput1);
-                break;
+                return dateInput;
             } catch (Exception e) {
                 System.out.println("Invalid date format.");
             }
         }
-        try {
-
-            // Time Input
-            while (true) {
-                try {
-                    System.out.println("(HH:mm) Now enter the time:");
-
-                    String timeInput1 = scanner.nextLine().trim();
-                    timeInput = LocalTime.parse(timeInput1);
-
-                    System.out.println("You have entered: " + timeInput1);
-                    break;
-                }
-                catch (Exception e){
-                    System.out.println("Invalid format.");
-                }
-            }
-            // Other Inputs
-            System.out.println("Now enter the description of your payment:");
-            String description = scanner.nextLine().trim();
-
-            System.out.println("Enter the vendor name:");
-            String vendor = scanner.nextLine().trim();
-
-            System.out.println("Now enter your payment amount:");
-            double amount = -Math.abs(scanner.nextDouble());
-            scanner.nextLine();
-
-            // Need to display new entry and then return to previous menu
-
-            System.out.println("Thank you! Returning you to previous menu...");
-            System.out.println(bold + """
-                    ▒▒▒▒▒▒▒▒▒▒ 0% ██▒▒▒▒▒▒▒▒ 20% ████▒▒▒▒▒▒ 40% ██████▒▒▒▒ 60% ████████▒▒ 80% ██████████ 100%
-                    """ + resetBold);
-        } catch (Exception e) {
-            System.out.println("Invalid input! Please try again.");
-        }
     }
+
+    public static LocalTime userTimeInput(Scanner scanner) {
+        LocalTime timeInput;
+        while (true) {
+            try {
+                String timeInput1 = userInputs(scanner);
+                timeInput = LocalTime.parse(timeInput1);
+
+                System.out.println("You have entered: " + timeInput1);
+                return timeInput;
+            } catch (Exception e) {
+                System.out.println("Invalid format.");
+            }
+        }
+
+    }
+
 
     // Add Deposits
     private static void addDeposit(Scanner scanner) {
@@ -119,68 +139,57 @@ public class HomeScreen {
                 └──────────────────────────────────────────┘
                 """ + resetBold);
 
-        LocalDate dateInput;
-        LocalTime timeInput;
-
         // Date Input
-        while (true) {
-            try {
-                System.out.println("Please enter the date of your deposit as -> yyyy-MM-dd:");
+        System.out.println("Please enter the date of your deposit as -> yyyy-MM-dd:");
+        LocalDate dateInput = userDateInput(scanner);
 
-                String dateInput1 = scanner.nextLine().trim();
-                dateInput = LocalDate.parse(dateInput1);
-
-                System.out.println("You have entered: " + dateInput1);
-
-
-                break;
-            } catch (Exception e) {
-                System.out.println("Invalid format.");
-            }
-
-        }
         // Time Input
-        while (true) {
-            try {
-                System.out.println("(HH:mm) Now enter the time:");
+        System.out.println("(HH:mm) Now enter the time:");
+        LocalTime timeInput = userTimeInput(scanner);
 
-                String timeInput1 = scanner.nextLine().trim();
-                timeInput = LocalTime.parse(timeInput1);
+        // String Inputs
+        System.out.println("Now enter the description of your deposit:");
+        String description = userInputs(scanner);
 
-                System.out.println("You have entered: " + timeInput1);
-                break;
-            }
-            catch (Exception e){
-                System.out.println("Invalid format.");
-            }
-        }
-        // Other Inputs
-        try {
-            System.out.println("Now enter the description of your deposit:");
-            String description = scanner.nextLine().trim();
+        System.out.println("Enter the vendor name:");
+        String vendor = userInputs(scanner);
 
-            System.out.println("Enter the vendor name:");
-            String vendor = scanner.nextLine().trim();
+        System.out.println("Now enter your deposit amount:");
+        double amount = userDoubleInputs(scanner);
 
-            System.out.println("Now enter your deposit amount:");
-            double amount = Math.abs(scanner.nextDouble());
+        System.out.println("Your entry is: ");
 
-            scanner.nextLine();
+//        try {
+//            readTransactions();
+//        }
+//        catch (Exception e) {
+//            System.out.println("File not Found!");
+//        }
 
-            System.out.println("Thank you! Returning you to previous menu..");
-            System.out.println(bold + """
+        System.out.println("Thank you! Returning you to previous menu..");
+        System.out.println(bold + """
                     ▒▒▒▒▒▒▒▒▒▒ 0% ██▒▒▒▒▒▒▒▒ 20% ████▒▒▒▒▒▒ 40% ██████▒▒▒▒ 60% ████████▒▒ 80% ██████████ 100%
                     """ + resetBold);
-        } catch (Exception a) {
-            System.out.println("Oops incorrect input, try again.");
-        }
 
         // Need to display new entry and then return to previous menu
 
     }
 
+
     // Load Transactions
-    public static void loadTransactions(String fileName) {
+    public static void loadTransactions(String fileName) throws FileNotFoundException {
+
+
+        BufferedReader transactionsReader = null;
+
+//        try {
+//
+//
+//        }
+//        catch (IOException e){
+//            System.out.println("File not found!");
+//        }
+
 
     }
 }

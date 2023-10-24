@@ -34,7 +34,6 @@ public class ReportsScreen {
 
                 case "3":
 
-
                 case "4":
 
                 case "5":

@@ -3,10 +3,8 @@ package com.pluralsight;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 public class Transaction {
     private String description;
