@@ -61,4 +61,12 @@ public class Transaction {
         this.time = time;
     }
 
+    @Override
+    public String toString() {
+        return  "Date: " + date + "\n" +
+                "Time: " + time + "\n" +
+                "Vendor: " + vendor + "\n" +
+                "Amount: " + amount + "\n" +
+                "Description: " + description;
+    }
 }

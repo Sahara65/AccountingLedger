@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import static com.pluralsight.ReportsScreen.reportsMenu;
 import static com.pluralsight.ANSIColors.*;
+import static com.pluralsight.TransactionIO.*;
 
 public class LedgerScreen {
     static void ledgerMenu(Scanner scanner) {
@@ -60,6 +61,9 @@ public class LedgerScreen {
                 │           Displaying Deposits!            │
                 └───────────────────────────────────────────┘
                 """ + resetBold);
+
+
+
     }
 
     private static void displayPayments() {

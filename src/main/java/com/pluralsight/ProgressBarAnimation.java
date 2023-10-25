@@ -1,7 +1,7 @@
 package com.pluralsight;
 
 public class ProgressBarAnimation {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
     }
 

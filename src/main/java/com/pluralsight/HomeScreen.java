@@ -48,7 +48,6 @@ public class HomeScreen {
 
     // Add Payments
     private static void addPayment(Scanner scanner) {
-
         System.out.println(yellow + """
                 ┌──────────────────────────────────────────┐
                 │        Let's make that payment!          │
@@ -73,14 +72,15 @@ public class HomeScreen {
 
         if (amount < 0) amount *= -1;
 
+        saveTransactions(fileName);
         Transaction newPayment = new Transaction(dateInput, timeInput, description, vendor, amount);
         transactions.add(newPayment);
 
-        saveTransactions(fileName);
+        loadTransactions(fileName);
 
-        System.out.println(yellow + "Your entry is: " + newPayment);
+        System.out.println(yellow + "Your entry is: " + "\n" + newPayment);
 
-        System.out.println(yellow + "Thank you! Returning you to previous menu...");
+        System.out.println(yellow + "Thank you! Returning you to previous menu...\n");
         System.out.println(yellow + bold + """
                 ▒▒▒▒▒▒▒▒▒▒ 0% ██▒▒▒▒▒▒▒▒ 20% ████▒▒▒▒▒▒ 40% ██████▒▒▒▒ 60% ████████▒▒ 80% ██████████ 100%
                 """ + resetBold);
@@ -88,8 +88,6 @@ public class HomeScreen {
 
     // Add Deposits
     private static void addDeposit(Scanner scanner) {
-
-
         System.out.println(yellow + bold + """
                 ┌──────────────────────────────────────────┐
                 │         Let's make that deposit!         │
@@ -116,8 +114,10 @@ public class HomeScreen {
 
         System.out.println(yellow + "Your entry is: ");
 
+        Transaction newDeposit = new Transaction(dateInput, timeInput, description, vendor, amount);
+        transactions.add(newDeposit);
 
-        // Need to display new entry and then return to previous menu
+        saveTransactions(fileName);
 
         System.out.println("Thank you! Returning you to previous menu..");
         System.out.println(yellow + bold + """
@@ -177,9 +177,3 @@ public class HomeScreen {
         }
     }
 }
-
-
-
-
-
-
