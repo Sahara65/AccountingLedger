@@ -17,8 +17,8 @@ public class Transaction {
         this.description = description;
         this.vendor = vendor;
         this.amount = amount;
-        date = LocalDate.now();
-        time = LocalTime.now();
+        date = dateInput;
+        time = timeInput;
     }
 
 

@@ -11,7 +11,6 @@ public class TransactionIO {
     public static ArrayList<Transaction> transactions = loadTransactions();
     public static ArrayList<Transaction> loadTransactions(){
 
-
         return new ArrayList<>();
     }
 
@@ -51,22 +50,19 @@ public class TransactionIO {
         }
     }
 
-    public static void displayAllPayments(ArrayList<Transaction> transactions) {
-    }
-
     public static void saveTransactions(String fileName) {
         try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName));
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, true));
 
             for (Transaction transactions : transactions) {
-                String userInputSections = String.format("%s, %s, %s, %s, %.2fn",
+                String userInputSections = String.format("%s,d %s, %s, %s, %.2f\n",
                 transactions.getDate(),
                 transactions.getTime(),
                 transactions.getVendor(),
                 transactions.getDescription(),
                 transactions.getAmount());
-                bufferedWriter.write(userInputSections);
 
+                bufferedWriter.write(userInputSections);
                 bufferedWriter.close();
 
             }
@@ -74,4 +70,11 @@ public class TransactionIO {
             System.out.println("File not found!");
         }
     }
+
+    public static void displayAllPayments(ArrayList<Transaction> transactions) {
+
+    }
+
+
+
 }
