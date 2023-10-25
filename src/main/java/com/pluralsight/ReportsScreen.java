@@ -3,11 +3,13 @@ package com.pluralsight;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+import static com.pluralsight.ANSIColors.green;
+
 public class ReportsScreen {
     static void reportsMenu(Scanner scanner) {
         boolean running = true;
 
-        System.out.println("""
+        System.out.println(green + """
                 \033[1m
                 ┌───────────────────────────────────────────┐
                 │        Welcome to the Reports Menu!       │
@@ -15,7 +17,7 @@ public class ReportsScreen {
                 """);
 
         while (running) {
-            System.out.println("""
+            System.out.println(green + """
                     Please select an option:
                     1) Month To Date
                     2) Previous Month

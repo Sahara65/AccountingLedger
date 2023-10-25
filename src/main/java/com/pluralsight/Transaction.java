@@ -9,9 +9,17 @@ import java.time.format.DateTimeFormatter;
 public class Transaction {
     private String description;
     private String vendor;
-    private double price;
+    private double amount;
     private LocalDate date;
     private LocalTime time;
+
+    public Transaction(LocalDate dateInput, LocalTime timeInput, String description, String vendor, double amount) {
+        this.description = description;
+        this.vendor = vendor;
+        this.amount = amount;
+        date = LocalDate.now();
+        time = LocalTime.now();
+    }
 
 
     public String getDescription() {
@@ -30,12 +38,11 @@ public class Transaction {
         this.vendor = vendor;
     }
 
-    public double getPrice() {
-        return price;
+    public double getAmount() {
+        return amount;
     }
-
-    public void setPrice(double price) {
-        this.price = price;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
     public LocalDate getDate() {
@@ -54,19 +61,4 @@ public class Transaction {
         this.time = time;
     }
 
-    public Transaction(String description, String vendor, double price, LocalDate date, LocalTime time) {
-        this.description = description;
-        this.vendor = vendor;
-        this.price = price;
-        this.date = date = LocalDate.now();
-        this.time = time = LocalTime.now();
-
-    }
-
-
-
-    public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    public static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(String.valueOf(dateFormat));
-    static final String TIME_FORMAT = "HH:mm";
-    public static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(TIME_FORMAT);
 }

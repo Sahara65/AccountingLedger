@@ -15,7 +15,7 @@ public class LedgerScreen {
                 """ + resetBold);
 
         while (true) {
-            System.out.println("""
+            System.out.println(green + """
                     Please select an option:
                     A) Display All Entries
                     D) Display Deposit Entries
@@ -49,6 +49,8 @@ public class LedgerScreen {
                 │           Displaying Ledger!              │
                 └───────────────────────────────────────────┘
                 """ + resetBold);
+
+
     }
 
     private static void displayDeposits() {
