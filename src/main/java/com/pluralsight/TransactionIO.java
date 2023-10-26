@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-
 public class TransactionIO {
     public static final String fileName = "transactions.csv";
     public static ArrayList<Transaction> transactions = loadTransactions(fileName);
@@ -51,7 +50,7 @@ public class TransactionIO {
 
                 bufferedWriter.write(userInputSections);
                 bufferedWriter.close();
-
+                break;
             }
         } catch (IOException e) {
             System.out.println("File not found!");

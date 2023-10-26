@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 
 import static com.pluralsight.ANSIColors.*;
+import static com.pluralsight.HomeScreen.progressBar;
 import static com.pluralsight.TransactionIO.*;
 
 public class ReportsScreen {
@@ -12,6 +13,7 @@ public class ReportsScreen {
         boolean running = true;
 
         System.out.println(green + bold + """
+                
                 ┌───────────────────────────────────────────┐
                 │        Welcome to the Reports Menu!       │
                 └───────────────────────────────────────────┘
@@ -40,7 +42,11 @@ public class ReportsScreen {
                     String vendorInput = scanner.nextLine().trim();
                     filterTransactionsByVendor(vendorInput);
                 }
-                case "0" -> running = false;
+                case "0" -> {
+                    running = false;
+                    // Progress Bar Animation
+                    progressBar();
+                }
                 default -> System.out.println("Invalid option, please try again!");
             }
         }
@@ -64,12 +70,9 @@ public class ReportsScreen {
     public static void filterByPreviousMonth() {
 //        for (Transaction transaction : transactions) {
 //
-//
 //        }
 
         System.out.println("The following are entries from the previous month: ");
-
-
     }
 
     public static void filterByYear() {
@@ -79,12 +82,10 @@ public class ReportsScreen {
 
     public static void filterByPreviousYear() {
         System.out.println("The following are entries from the previous year: ");
-
     }
 
 
     public static void filterTransactionsByVendor(String vendorInput) {
-
         System.out.println("The following are entries filtered by chosen vendor: ");
         for (Transaction transaction : transactions) {
 

@@ -1,10 +1,9 @@
 package com.pluralsight;
 
-import java.io.*;
 import java.util.*;
 
 public class LedgerAppRun {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
 

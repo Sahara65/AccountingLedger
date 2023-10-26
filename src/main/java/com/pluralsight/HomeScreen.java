@@ -1,6 +1,5 @@
 package com.pluralsight;
 
-import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
@@ -21,6 +20,7 @@ public class HomeScreen {
         // Menu Choices
         while (true) {
             System.out.println(green + """
+                    
                     Please select an option:
                     D) Add Deposit
                     P) Make Payment
@@ -32,7 +32,10 @@ public class HomeScreen {
             switch (input.toUpperCase()) {
                 case "D" -> addDeposit(scanner);
                 case "P" -> addPayment(scanner);
-                case "L" -> ledgerMenu(scanner);
+                case "L" -> {
+                    progressBar();
+                    ledgerMenu(scanner);
+                }
                 case "X" -> {
                     System.out.println(red + bold + """
                             ┌───────────────────────────────────────────────────────────────┐
@@ -55,10 +58,10 @@ public class HomeScreen {
                 """ + resetBold);
 
         // Date Input
-        System.out.println(yellow + "Please enter the date of your payment as -> yyyy-MM-dd:");
+        System.out.println(yellow + "Please enter the date of your payment as -> YYYY-MM-DD:");
         LocalDate dateInput = userDateInput(scanner);
 
-        System.out.println(yellow + "(HH:mm) Now enter the time:");
+        System.out.println(yellow + "(HH:MM) Now enter the time:");
         LocalTime timeInput = userTimeInput(scanner);
 
         System.out.println(yellow + "Now enter the description of your payment:");
@@ -80,9 +83,9 @@ public class HomeScreen {
         System.out.println(yellow + "Your entry is: " + "\n" + newPayment);
 
         System.out.println(yellow + "Thank you! Returning you to previous menu...\n");
-        System.out.println(yellow + bold + """
-                ▒▒▒▒▒▒▒▒▒▒ 0% ██▒▒▒▒▒▒▒▒ 20% ████▒▒▒▒▒▒ 40% ██████▒▒▒▒ 60% ████████▒▒ 80% ██████████ 100%
-                """ + resetBold);
+
+        // Progress Bar Animation
+        progressBar();
     }
 
     // Add Deposits
@@ -94,11 +97,11 @@ public class HomeScreen {
                 """ + resetBold);
 
         // Date Input
-        System.out.println(yellow + "Please enter the date of your deposit as -> yyyy-MM-dd:");
+        System.out.println(yellow + "Please enter the date of your deposit as -> YYYY-MM-DD:");
         LocalDate dateInput = userDateInput(scanner);
 
         // Time Input
-        System.out.println(yellow + "(HH:mm) Now enter the time:");
+        System.out.println(yellow + "(HH:MM) Now enter the time:");
         LocalTime timeInput = userTimeInput(scanner);
 
         // String Inputs
@@ -120,9 +123,9 @@ public class HomeScreen {
         saveTransactions(fileName);
 
         System.out.println("Thank you! Returning you to previous menu..");
-        System.out.println(yellow + bold + """
-                ▒▒▒▒▒▒▒▒▒▒ 0% ██▒▒▒▒▒▒▒▒ 20% ████▒▒▒▒▒▒ 40% ██████▒▒▒▒ 60% ████████▒▒ 80% ██████████ 100%
-                """ + resetBold);
+
+        // Progress Bar Animation
+        progressBar();
 
     }
 
@@ -174,6 +177,17 @@ public class HomeScreen {
             } catch (Exception e) {
                 System.out.println(yellow + "Invalid format. Please use HH:mm");
             }
+        }
+    }
+
+    public static void progressBar() {
+        // Progress Bar Animation
+        try {
+            String[] String = new String[0];
+            ProgressBarAnimation.main(String);
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
