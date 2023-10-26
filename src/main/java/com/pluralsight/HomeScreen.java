@@ -68,9 +68,8 @@ public class HomeScreen {
         String vendor = userInputs(scanner);
 
         System.out.println(yellow + "Now enter your payment amount:");
-        double amount = userDoubleInputs(scanner);
+        double amount = userDoubleInputs(scanner) * -1;
 
-        if (amount < 0) amount *= -1;
 
         saveTransactions(fileName);
         Transaction newPayment = new Transaction(dateInput, timeInput, description, vendor, amount);
@@ -112,10 +111,11 @@ public class HomeScreen {
         System.out.println(yellow + "Now enter your deposit amount:");
         double amount = userDoubleInputs(scanner);
 
-        System.out.println(yellow + "Your entry is: ");
 
         Transaction newDeposit = new Transaction(dateInput, timeInput, description, vendor, amount);
         transactions.add(newDeposit);
+
+        System.out.println(yellow + "Your entry is: " + "\n" + newDeposit);
 
         saveTransactions(fileName);
 

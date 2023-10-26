@@ -1,8 +1,6 @@
 package com.pluralsight;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Scanner;
 
 
@@ -34,16 +32,17 @@ public class ReportsScreen {
             String input = scanner.nextLine().trim();
 
             switch (input) {
-                case "1":
+                case "1": filterByPresentMonth();
 
+                case "2": filterByPreviousMonth();
 
-                case "2":
+                case "3": filterByYear();
 
-                case "3":
+                case "4": filterByPreviousYear();
 
-                case "4":
+                case "5":
+                    filterTransactionsByVendor();
 
-                case "5": filterTransactionsByVendor();
 
 
                 case "0":
@@ -56,43 +55,39 @@ public class ReportsScreen {
     }
 
     public static void filterByPresentMonth() {
+        for (Transaction transaction : transactions) {
+            LocalDate date = LocalDate.now();
 
+            if (transaction.getDate().getMonth() == date.getMonth() && transaction.getDate().getYear() == date.getYear()) {
 
+                System.out.printf("%s, %s, %.2f%n", transaction.getDate(), transaction.getVendor(), transaction.getAmount());
 
-//        LocalDate date = LocalDate.now();
-//
-//        System.out.println("Here are all entries by present month: ");
-//
-//        for (Transaction transaction : transactions) {
-//
-//            if(transaction.getDate().getMonth() == ) {
-//                System.out.println(transaction.getDate()+" "+transaction.getTime()+" "+transaction.getDescription()+" "+transaction.getVendor()+" "+transaction.getAmount());
-//
-//            }
+            }
+            break;
         }
+
+    }
+
 
     public static void filterByPreviousMonth() {
-        for (Transaction transaction : transactions) {
+//        for (Transaction transaction : transactions) {
+//
+//
+//        }
 
 
-
-        }
-
-
-        System.out.println("Here are all entries by present month: ");
-
-
+        System.out.println("Here are all entries by previous month: ");
 
 
     }
 
     public static void filterByYear() {
-        System.out.println("Here are all entries by present month: ");
+        System.out.println("Here are all entries by current year: ");
 
     }
 
     public static void filterByPreviousYear() {
-        System.out.println("Here are all entries by present month: ");
+        System.out.println("Here are all entries by previous year: ");
 
     }
 
@@ -106,14 +101,15 @@ public class ReportsScreen {
 
         for (Transaction transaction : transactions) {
 
-                if(transaction.getVendor().equalsIgnoreCase(vendorInput)) {
-                    System.out.println(transaction.getDate()+" "+transaction.getTime()+" "+transaction.getDescription()+" "+transaction.getVendor()+" "+transaction.getAmount());
+            if (transaction.getVendor().equalsIgnoreCase(vendorInput)) {
+                System.out.println(transaction.getDate() + " " + transaction.getVendor() + " " + transaction.getAmount());
 
-                }     
+            }
         }
     }
+}
 
 //    private static void filterTransactionsByDate(LocalDate startDate, LocalDate endDate) {
 //
-    }
-}
+//    }
+//}

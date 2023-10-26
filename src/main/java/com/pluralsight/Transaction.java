@@ -1,10 +1,7 @@
 package com.pluralsight;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 public class Transaction {
     private String description;
@@ -17,8 +14,9 @@ public class Transaction {
         this.description = description;
         this.vendor = vendor;
         this.amount = amount;
-        date = dateInput;
-        time = timeInput;
+        this.date = dateInput;
+        this.time = timeInput;
+
     }
 
 
@@ -41,6 +39,7 @@ public class Transaction {
     public double getAmount() {
         return amount;
     }
+
     public void setAmount(double amount) {
         this.amount = amount;
     }
@@ -61,9 +60,10 @@ public class Transaction {
         this.time = time;
     }
 
+
     @Override
     public String toString() {
-        return  "Date: " + date + "\n" +
+        return "Date: " + date + "\n" +
                 "Time: " + time + "\n" +
                 "Vendor: " + vendor + "\n" +
                 "Amount: " + amount + "\n" +
