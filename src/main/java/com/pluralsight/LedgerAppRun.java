@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.*;
 
 public class LedgerAppRun {
-
     public static void main(String[] args) throws FileNotFoundException {
 
         Scanner scanner = new Scanner(System.in);

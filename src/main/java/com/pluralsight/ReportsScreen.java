@@ -4,19 +4,18 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 
-import static com.pluralsight.ANSIColors.green;
-import static com.pluralsight.TransactionIO.transactions;
+import static com.pluralsight.ANSIColors.*;
+import static com.pluralsight.TransactionIO.*;
 
 public class ReportsScreen {
     static void reportsMenu(Scanner scanner) {
         boolean running = true;
 
-        System.out.println(green + """
-                \033[1m
+        System.out.println(green + bold + """
                 ┌───────────────────────────────────────────┐
                 │        Welcome to the Reports Menu!       │
-                └───────────────────────────────────────────┘\033[0m
-                """);
+                └───────────────────────────────────────────┘
+                """ + resetBold);
 
         while (running) {
             System.out.println(green + """
@@ -32,33 +31,28 @@ public class ReportsScreen {
             String input = scanner.nextLine().trim();
 
             switch (input) {
-                case "1": filterByPresentMonth();
-
-                case "2": filterByPreviousMonth();
-
-                case "3": filterByYear();
-
-                case "4": filterByPreviousYear();
-
-                case "5":
-                    filterTransactionsByVendor();
-
-
-
-                case "0":
-                    running = false;
-                default:
-                    System.out.println("Invalid option, please try again!");
-                    break;
+                case "1" -> filterByPresentMonth();
+                case "2" -> filterByPreviousMonth();
+                case "3" -> filterByYear();
+                case "4" -> filterByPreviousYear();
+                case "5" -> {
+                    System.out.println("Please enter the vendor name: ");
+                    String vendorInput = scanner.nextLine().trim();
+                    filterTransactionsByVendor(vendorInput);
+                }
+                case "0" -> running = false;
+                default -> System.out.println("Invalid option, please try again!");
             }
         }
     }
 
     public static void filterByPresentMonth() {
+        System.out.println("The following are entries from the current month: ");
         for (Transaction transaction : transactions) {
             LocalDate date = LocalDate.now();
 
-            if (transaction.getDate().getMonth() == date.getMonth() && transaction.getDate().getYear() == date.getYear()) {
+
+            if (transaction.getDate().getMonth() == date.getMonth()) {
 
                 System.out.printf("%s, %s, %.2f%n", transaction.getDate(), transaction.getVendor(), transaction.getAmount());
 
@@ -67,49 +61,42 @@ public class ReportsScreen {
         }
 
     }
-
-
     public static void filterByPreviousMonth() {
 //        for (Transaction transaction : transactions) {
 //
 //
 //        }
 
-
-        System.out.println("Here are all entries by previous month: ");
+        System.out.println("The following are entries from the previous month: ");
 
 
     }
 
     public static void filterByYear() {
-        System.out.println("Here are all entries by current year: ");
+        System.out.println("The following are entries from the current year: ");
 
     }
 
     public static void filterByPreviousYear() {
-        System.out.println("Here are all entries by previous year: ");
+        System.out.println("The following are entries from the previous year: ");
 
     }
 
 
-    public static void filterTransactionsByVendor() {
+    public static void filterTransactionsByVendor(String vendorInput) {
 
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Please enter the vendor name: ");
-        String vendorInput = scanner.nextLine().trim();
-
+        System.out.println("The following are entries filtered by chosen vendor: ");
         for (Transaction transaction : transactions) {
 
-            if (transaction.getVendor().equalsIgnoreCase(vendorInput)) {
-                System.out.println(transaction.getDate() + " " + transaction.getVendor() + " " + transaction.getAmount());
-
+            if (vendorInput.equalsIgnoreCase(transaction.getVendor())) {
+                System.out.printf("%s, %s, %s, %s, %.2f%n", transaction.getDate(), transaction.getTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
             }
+            else {
+                System.out.println("No results found... 😔");
+            }
+            break;
         }
     }
 }
 
-//    private static void filterTransactionsByDate(LocalDate startDate, LocalDate endDate) {
-//
-//    }
-//}
+
