@@ -26,3 +26,11 @@ This Accounting Ledger is a minimalistic Java application that allows users to k
 - ### Vendor Filtering: Filter transactions through specified vendors to analyze financial interactions.
  
   ![AccountingPreview3](https://github.com/Sahara65/AccountingLedger/assets/93899072/5a4cf7fd-74cb-4495-89ae-eb6643e93d5f)
+
+
+  ## Interesting piece of code!
+  The following code utilizes the Carriage Return so that the terminal re-prints to the same line, thus simulating an Animation!
+  ![Screenshot 2023-10-27 104123](https://github.com/Sahara65/AccountingLedger/assets/93899072/9fa490ca-e1dd-48c8-80f4-7fe69305f350)
+  ![Screenshot 2023-10-27 104151](https://github.com/Sahara65/AccountingLedger/assets/93899072/de372d8b-b858-43dc-ae66-c599578a2e58)
+
+
