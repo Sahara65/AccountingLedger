@@ -76,7 +76,7 @@ public enum HomeScreen {
         System.out.println(yellow + "Now enter your payment amount:");
         double amount = userDoubleInputs(scanner) * -1;
 
-        // Writing Entry to File
+        // Saving Entry to File
         saveTransactions(fileName);
         Transaction newPayment = new Transaction(dateInput, timeInput, description, vendor, amount);
         transactions.add(newPayment);
@@ -112,11 +112,11 @@ public enum HomeScreen {
         System.out.println(yellow + "Now enter the description of your deposit:");
         String description = userInputs(scanner);
 
-
+        // Double Input
         System.out.println(yellow + "Now enter your deposit amount:");
         double amount = userDoubleInputs(scanner);
 
-
+        // Saving Entry to file
         Transaction newDeposit = new Transaction(dateInput, timeInput, vendor, description, amount);
         transactions.add(newDeposit);
 
@@ -126,7 +126,6 @@ public enum HomeScreen {
         System.out.println("Thank you! Returning you to previous menu..");
         // Progress Bar Animation
         progressBar();
-
     }
 
     // Handles String Inputs
