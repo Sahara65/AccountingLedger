@@ -1,5 +1,7 @@
 package com.pluralsight;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 import static com.pluralsight.HomeScreen.progressBar;
@@ -7,7 +9,9 @@ import static com.pluralsight.ReportsScreen.reportsMenu;
 import static com.pluralsight.ANSIColors.*;
 import static com.pluralsight.TransactionIO.*;
 
-public class LedgerScreen {
+public enum LedgerScreen {
+    ;
+
     static void ledgerMenu(Scanner scanner) {
 
         System.out.println(bold + """
@@ -54,10 +58,21 @@ public class LedgerScreen {
 
         loadTransactions(fileName);
 
+        System.out.println("""
+                ┌────────────┬───────┬─────────────────────────────────────┬──────────────┬────────────┐
+                │   Date     │  Time │           Description               │    Vendor    │   Amount   │
+                ├────────────┼───────┼─────────────────────────────────────┼──────────────┼────────────┤
+                """);
+
+        dateTimeSorter();
         for (Transaction transaction : transactions) {
-            System.out.printf("%s, %s, %s, %s, %.2f%n", transaction.getDate(), transaction.getTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
+            System.out.printf("│ %s │ %s │ %-30.35s      │  %-11.16s │    %.2f    │\n", transaction.getDate(), transaction.getTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
         }
+        System.out.println("""
+                └────────────┴───────┴─────────────────────────────────────┴──────────────┴─────────────┘
+                """);
     }
+
 
     private static void displayDeposits() {
         System.out.println(bold + """
@@ -68,11 +83,21 @@ public class LedgerScreen {
 
         loadTransactions(fileName);
 
+        System.out.println("""
+                ┌────────────┬───────┬─────────────────────────────────────┬──────────────┬────────────┐
+                │   Date     │  Time │           Description               │    Vendor    │   Amount   │
+                ├────────────┼───────┼─────────────────────────────────────┼──────────────┼────────────┤
+                """);
+
+        dateTimeSorter();
         for (Transaction transaction : transactions) {
-            if (transaction.getAmount() > 0) {
-                System.out.printf("%s, %s, %s, %s, %.2f%n", transaction.getDate(), transaction.getTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
+            if (0 < transaction.getAmount()) {
+                System.out.printf("│ %s │ %s │ %-30.35s      │  %-11.16s │    %.2f    │\n", transaction.getDate(), transaction.getTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
             }
         }
+        System.out.println("""
+                └────────────┴───────┴─────────────────────────────────────┴──────────────┴─────────────┘
+                """);
     }
     private static void displayPayments () {
         System.out.println(
@@ -84,12 +109,32 @@ public class LedgerScreen {
 
         loadTransactions(fileName);
 
-        for (Transaction transaction : transactions) {
-            if (transaction.getAmount() < 0) {
-                System.out.printf("%s, %s, %s, %s, %.2f%n", transaction.getDate(), transaction.getTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
-            }
+        System.out.println("""
+                ┌────────────┬───────┬─────────────────────────────────────┬──────────────┬────────────┐
+                │   Date     │  Time │           Description               │    Vendor    │   Amount   │
+                ├────────────┼───────┼─────────────────────────────────────┼──────────────┼────────────┤
+                """);
 
+        dateTimeSorter();
+        for (Transaction transaction : transactions) {
+            if (0 > transaction.getAmount()) {
+                System.out.printf("│ %s │ %s │ %-30.35s      │  %-11.16s │    %.2f    │\n", transaction.getDate(), transaction.getTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
+            }
         }
+        System.out.println("""
+                └────────────┴───────┴─────────────────────────────────────┴──────────────┴─────────────┘
+                """);
+    }
+    public static void dateTimeSorter() {
+
+        Comparator<Transaction> dateComparator = (t1, t2) -> {
+            int dateComparison = t2.getDate().compareTo(t1.getDate());
+            if (0 == dateComparison) {
+                return t2.getTime().compareTo(t1.getTime());
+            }
+            return dateComparison;
+        };
+        transactions.sort(dateComparator);
     }
 }
 

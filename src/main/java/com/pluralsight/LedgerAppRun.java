@@ -1,15 +1,14 @@
 package com.pluralsight;
 
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class LedgerAppRun {
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
 
-        // Menus
+        // Main Menu
         HomeScreen.homeMenu(scanner);
-        LedgerScreen.ledgerMenu(scanner);
-        ReportsScreen.reportsMenu(scanner);
     }
 }

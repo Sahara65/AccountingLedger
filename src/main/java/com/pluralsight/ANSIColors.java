@@ -1,6 +1,7 @@
 package com.pluralsight;
 
-public final class ANSIColors {
+public enum ANSIColors {
+    ;
 
     // Font Colors
     public static final String reset = "\u001B[0m";

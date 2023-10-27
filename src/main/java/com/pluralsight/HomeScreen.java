@@ -8,7 +8,9 @@ import static com.pluralsight.LedgerScreen.*;
 import static com.pluralsight.ANSIColors.*;
 import static com.pluralsight.TransactionIO.*;
 
-public class HomeScreen {
+public enum HomeScreen {
+    ;
+
     public static void homeMenu(Scanner scanner) {
         System.out.println(green + bold + """
                                 
@@ -64,11 +66,12 @@ public class HomeScreen {
         System.out.println(yellow + "(HH:MM) Now enter the time:");
         LocalTime timeInput = userTimeInput(scanner);
 
-        System.out.println(yellow + "Now enter the description of your payment:");
-        String description = userInputs(scanner);
-
+        // String Input
         System.out.println(yellow + "Enter the vendor name:");
         String vendor = userInputs(scanner);
+
+        System.out.println(yellow + "Now enter the description of your payment:");
+        String description = userInputs(scanner);
 
         System.out.println(yellow + "Now enter your payment amount:");
         double amount = userDoubleInputs(scanner) * -1;
@@ -105,25 +108,24 @@ public class HomeScreen {
         LocalTime timeInput = userTimeInput(scanner);
 
         // String Inputs
+        System.out.println(yellow + "Enter the vendor name:");
+        String vendor = userInputs(scanner);
+
         System.out.println(yellow + "Now enter the description of your deposit:");
         String description = userInputs(scanner);
 
-        System.out.println(yellow + "Enter the vendor name:");
-        String vendor = userInputs(scanner);
 
         System.out.println(yellow + "Now enter your deposit amount:");
         double amount = userDoubleInputs(scanner);
 
 
-        Transaction newDeposit = new Transaction(dateInput, timeInput, description, vendor, amount);
+        Transaction newDeposit = new Transaction(dateInput, timeInput, vendor, description, amount);
         transactions.add(newDeposit);
 
         System.out.println(yellow + "Your entry is: " + "\n" + newDeposit);
-
         saveTransactions(fileName);
 
         System.out.println("Thank you! Returning you to previous menu..");
-
         // Progress Bar Animation
         progressBar();
 
@@ -133,20 +135,21 @@ public class HomeScreen {
     public static String userInputs(Scanner scanner) {
         return scanner.nextLine().trim();
     }
-
     // Double Inputs
     public static double userDoubleInputs(Scanner scanner) {
         while (true) {
             try {
                 double doubleInput = scanner.nextDouble();
                 scanner.nextLine();
+
+                System.out.println(yellow + "You have entered: " + doubleInput);
+
                 return doubleInput;
             } catch (Exception e) {
                 System.out.println("Invalid format.");
             }
         }
     }
-
     // LocalDate Inputs
     public static LocalDate userDateInput(Scanner scanner) {
         while (true) {
@@ -163,7 +166,6 @@ public class HomeScreen {
             }
         }
     }
-
     // LocalTime Inputs
     public static LocalTime userTimeInput(Scanner scanner) {
         LocalTime timeInput;
@@ -179,7 +181,7 @@ public class HomeScreen {
             }
         }
     }
-
+    // Progress Bar Method
     public static void progressBar() {
         // Progress Bar Animation
         try {
