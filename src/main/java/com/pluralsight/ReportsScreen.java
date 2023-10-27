@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 import static com.pluralsight.ANSIColors.*;
 import static com.pluralsight.HomeScreen.progressBar;
 import static com.pluralsight.TransactionIO.*;
@@ -30,7 +29,6 @@ public class ReportsScreen {
                     4) Previous Year
                     5) Search by Vendor
                     0) Back""");
-
 
             String input = scanner.nextLine().trim();
 
@@ -60,11 +58,11 @@ public class ReportsScreen {
 
         for (Transaction transaction : transactions) {
             if (transaction.getDate().getYear() == currentDate.getYear() && transaction.getDate().getMonth() == currentDate.getMonth()) {
-                System.out.printf("%s, %s, %s, %s, %.2f%n", transaction.getDate(), transaction.getTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
+                System.out.printf("%s, %s, %s, %s, %.2f%n",
+                        transaction.getDate(), transaction.getTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
             }
         }
     }
-
 
     public static void filterByPreviousMonth(ArrayList<Transaction> transactions) {
         System.out.println("The following are entries from the previous month: ");
@@ -73,9 +71,9 @@ public class ReportsScreen {
 
         for (Transaction transaction : transactions)
             if (transaction.getDate().getYear() == previousMonth.getYear() && transaction.getDate().getMonth() == previousMonth.getMonth())
-                System.out.printf("%s, %s, %s, %s, %.2f%n", transaction.getDate(), transaction.getTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
+                System.out.printf("%s, %s, %s, %s, %.2f%n",
+                        transaction.getDate(), transaction.getTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
     }
-
 
     public static void filterByYear(ArrayList<Transaction> transactions) {
         System.out.println("The following are entries from the current year: ");
@@ -87,7 +85,8 @@ public class ReportsScreen {
             int transactionYear = transactionDate.getYear();
 
             if (transactionYear == currentYear) {
-                System.out.printf("%s, %s, %s, %s, %.2f%n", transaction.getDate(), transaction.getTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
+                System.out.printf("%s, %s, %s, %s, %.2f%n",
+                        transaction.getDate(), transaction.getTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
             }
         }
     }
@@ -103,13 +102,11 @@ public class ReportsScreen {
             int transactionYear = transactionDate.getYear();
 
             if (transactionYear == previousYear) {
-                System.out.printf("%s, %s, %s, %s, %.2f%n", transaction.getDate(), transaction.getTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
+                System.out.printf("%s, %s, %s, %s, %.2f%n",
+                        transaction.getDate(), transaction.getTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
             }
         }
-
-
     }
-
 
     public static void filterTransactionsByVendor(final String vendorInput, final ArrayList<Transaction> transactions) {
 
@@ -120,10 +117,9 @@ public class ReportsScreen {
         for (final Transaction transaction : transactions) {
 
             if (vendorInput.equalsIgnoreCase(transaction.getVendor())) {
-                System.out.printf("%s, %s, %s, %s, %.2f%n", transaction.getDate(), transaction.getTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
+                System.out.printf("%s, %s, %s, %s, %.2f%n",
+                        transaction.getDate(), transaction.getTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
             }
-
         }
-
     }
 }

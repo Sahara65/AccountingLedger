@@ -22,13 +22,13 @@ public enum HomeScreen {
         // Menu Choices
         while (true) {
             System.out.println(green + """
-                    
+                                        
                     Please select an option:
                     D) Add Deposit
                     P) Make Payment
                     L) Ledger
                     X) Exit""");
-
+            // Menu Choice Input
             String input = userInputs(scanner);
 
             switch (input.toUpperCase()) {
@@ -62,29 +62,27 @@ public enum HomeScreen {
         // Date Input
         System.out.println(yellow + "Please enter the date of your payment as -> YYYY-MM-DD:");
         LocalDate dateInput = userDateInput(scanner);
-
+        // Time Input
         System.out.println(yellow + "(HH:MM) Now enter the time:");
         LocalTime timeInput = userTimeInput(scanner);
 
-        // String Input
+        // Vendor Input
         System.out.println(yellow + "Enter the vendor name:");
         String vendor = userInputs(scanner);
-
+        // Description Input
         System.out.println(yellow + "Now enter the description of your payment:");
         String description = userInputs(scanner);
-
+        // Amount Input
         System.out.println(yellow + "Now enter your payment amount:");
         double amount = userDoubleInputs(scanner) * -1;
 
-
+        // Writing Entry to File
         saveTransactions(fileName);
         Transaction newPayment = new Transaction(dateInput, timeInput, description, vendor, amount);
         transactions.add(newPayment);
-
         loadTransactions(fileName);
 
         System.out.println(yellow + "Your entry is: " + "\n" + newPayment);
-
         System.out.println(yellow + "Thank you! Returning you to previous menu...\n");
 
         // Progress Bar Animation
@@ -135,6 +133,7 @@ public enum HomeScreen {
     public static String userInputs(Scanner scanner) {
         return scanner.nextLine().trim();
     }
+
     // Double Inputs
     public static double userDoubleInputs(Scanner scanner) {
         while (true) {
@@ -150,6 +149,7 @@ public enum HomeScreen {
             }
         }
     }
+
     // LocalDate Inputs
     public static LocalDate userDateInput(Scanner scanner) {
         while (true) {
@@ -166,6 +166,7 @@ public enum HomeScreen {
             }
         }
     }
+
     // LocalTime Inputs
     public static LocalTime userTimeInput(Scanner scanner) {
         LocalTime timeInput;
@@ -181,14 +182,14 @@ public enum HomeScreen {
             }
         }
     }
+
     // Progress Bar Method
     public static void progressBar() {
         // Progress Bar Animation
         try {
             String[] String = new String[0];
             ProgressBarAnimation.main(String);
-        }
-        catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
