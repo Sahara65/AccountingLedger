@@ -11,7 +11,7 @@ import static com.pluralsight.TransactionIO.*;
 
 public enum LedgerScreen {
     ;
-
+    // Ledger Menu
     static void ledgerMenu(Scanner scanner) {
 
         System.out.println(bold + """
@@ -32,7 +32,7 @@ public enum LedgerScreen {
                     H) Return to Home""");
 
             String input = scanner.nextLine().trim();
-
+            // Choices
             switch (input.toUpperCase()) {
                 case "A" -> displayLedger();
                 case "D" -> displayDeposits();
@@ -77,7 +77,7 @@ public enum LedgerScreen {
                 """);
     }
 
-
+    // Displaying all Deposits
     private static void displayDeposits() {
         System.out.println(bold + """
                 ┌───────────────────────────────────────────┐
@@ -104,7 +104,7 @@ public enum LedgerScreen {
                 └────────────┴───────┴─────────────────────────────────────┴──────────────────┴────────────────┘
                 """);
     }
-
+    // Displaying all Payments
     private static void displayPayments() {
         System.out.println(
                 bold + """
@@ -132,7 +132,7 @@ public enum LedgerScreen {
                 └────────────┴───────┴─────────────────────────────────────┴──────────────────┴────────────────┘
                 """);
     }
-
+    // Date + Time sorter so arrange data from newest to oldest
     public static void dateTimeSorter() {
 
         Comparator<Transaction> dateComparator = (t1, t2) -> {

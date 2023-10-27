@@ -10,7 +10,7 @@ public enum TransactionIO {
     ;
     public static final String fileName = "transactions.csv";
     public static final ArrayList<Transaction> transactions = loadTransactions(fileName);
-
+    // Loading Transactions from csv file
     public static ArrayList<Transaction> loadTransactions(String fileName) {
 
         ArrayList<Transaction> loadedTransactions = new ArrayList<>();
@@ -35,7 +35,7 @@ public enum TransactionIO {
         }
         return loadedTransactions;
     }
-
+    // Saving Transactions to file
     public static void saveTransactions(String fileName) {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, true));

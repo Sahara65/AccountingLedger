@@ -51,7 +51,7 @@ public class ReportsScreen {
             }
         }
     }
-
+    //Filtering by current month
     public static void filterByPresentMonth(ArrayList<Transaction> transactions) {
         System.out.println("The following are entries from the current month: ");
         LocalDate currentDate = LocalDate.now();
@@ -63,7 +63,7 @@ public class ReportsScreen {
             }
         }
     }
-
+    // Filtering by previous month
     public static void filterByPreviousMonth(ArrayList<Transaction> transactions) {
         System.out.println("The following are entries from the previous month: ");
         LocalDate currentDate = LocalDate.now();
@@ -74,7 +74,7 @@ public class ReportsScreen {
                 System.out.printf("%s, %s, %s, %s, %.2f%n",
                         transaction.getDate(), transaction.getTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
     }
-
+    // Filtering by current year
     public static void filterByYear(ArrayList<Transaction> transactions) {
         System.out.println("The following are entries from the current year: ");
 
@@ -90,7 +90,7 @@ public class ReportsScreen {
             }
         }
     }
-
+    // Filtering by previous year
     public static void filterByPreviousYear(ArrayList<Transaction> transactions) {
         System.out.println("The following are entries from the previous year: ");
 
@@ -107,7 +107,7 @@ public class ReportsScreen {
             }
         }
     }
-
+    // Filtering by vendor
     public static void filterTransactionsByVendor(final String vendorInput, final ArrayList<Transaction> transactions) {
 
         System.out.println("The following are entries filtered by chosen vendor: ");
